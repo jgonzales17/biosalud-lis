@@ -167,4 +167,11 @@ alter table toma_muestra add constraint FK_toma_tecnico
     foreign key (id_tecnico) references tecnico_laboratorio;
 GO
 
-PRINT '¡ÉXITO! Base de datos BioSaludDB creada y lista.';
+-- 5. INSERTA EL USUARIO ADMINISTRADOR POR DEFECTO
+PRINT 'Insertando usuario admin por defecto (admin/admin)...';
+INSERT INTO usuario (nombre_usuario, contrasena, rol)
+VALUES ('admin', 'admin', 'ADMIN');
+GO
+
+PRINT '¡ÉXITO! Base de datos BioSaludDB creada y lista con usuario admin.';
+GO
