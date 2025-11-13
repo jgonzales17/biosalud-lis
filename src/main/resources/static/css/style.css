@@ -1,0 +1,228 @@
+/* --- ESTILOS MODERNOS PARA CLÍNICA (V2.1 - Modal Corregido) --- */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+    --primary-color: #007BFF;
+    --primary-hover: #0056b3;
+    --sidebar-bg: #1e2a38;
+    --sidebar-text: #ecf0f1;
+    --sidebar-active: #007BFF;
+    --main-bg: #f4f7f6;
+    --card-bg: #ffffff;
+    --text-color: #333;
+    --text-light: #555;
+    --border-color: #e0e0e0;
+    --shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    --success-bg: #d4edda;
+    --success-text: #155724;
+    --success-border: #c3e6cb;
+    --error-bg: #f8d7da;
+    --error-text: #721c24;
+    --error-border: #f5c6cb;
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: var(--main-bg);
+    margin: 0;
+    display: flex;
+    color: var(--text-color);
+}
+
+/* --- MENÚ LATERAL (Sidebar) --- */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    height: 100vh;
+    padding-top: 20px;
+    position: fixed;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+.sidebar-header {
+    background-color: #ffffff;
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+.sidebar-header img { width: 180px; height: auto; }
+.sidebar nav ul { list-style: none; padding: 0; }
+.sidebar nav li a {
+    display: block;
+    padding: 15px 25px;
+    text-decoration: none;
+    color: var(--sidebar-text);
+    font-weight: 500;
+    transition: background-color 0.2s ease, padding-left 0.2s ease;
+}
+.sidebar nav li a:hover { background-color: rgba(255, 255, 255, 0.05); padding-left: 30px; }
+.sidebar nav li a.active {
+    background-color: var(--sidebar-active);
+    color: #ffffff;
+    font-weight: 700;
+    border-left: 4px solid #ffffff;
+    padding-left: 21px;
+}
+
+/* --- CONTENIDO PRINCIPAL --- */
+.content {
+    margin-left: 250px;
+    padding: 30px;
+    width: calc(100% - 250px);
+}
+.page-section { display: none; }
+.page-section.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- TARJETAS (Cards) --- */
+.card {
+    background-color: var(--card-bg);
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+}
+.card h3 {
+    margin-top: 0;
+    border-bottom: 2px solid var(--main-bg);
+    padding-bottom: 15px;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+.input-group { margin-bottom: 15px; }
+.input-group label { display: block; margin-bottom: 8px; color: var(--text-light); font-weight: 500; }
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input-group input:focus, .input-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(0,123,255,0.3);
+}
+
+/* --- BOTONES (Buttons) --- */
+button {
+    padding: 12px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+button:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,123,255,0.3);
+}
+button:active { transform: translateY(0); }
+button.btn-secondary { background-color: #6c757d; }
+button.btn-secondary:hover { background-color: #5a6268; box-shadow: none; }
+
+/* --- TABLAS (¡Modernas!) --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+th, td { padding: 15px; text-align: left; border-bottom: 1px solid var(--border-color); }
+thead { background-color: var(--sidebar-bg); color: #ffffff; font-weight: 700; }
+tbody tr { background-color: #fff; transition: background-color 0.2s ease; }
+tbody tr:nth-child(even) { background-color: #f9f9f9; }
+tbody tr:hover { background-color: #e9ecef; }
+td button { padding: 5px 10px; font-size: 14px; margin-right: 5px; }
+
+/* --- DASHBOARD (Stat Cards) --- */
+.stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.stat-card {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,123,255,0.4);
+}
+.stat-card h4 { margin: 0 0 10px 0; font-size: 1.2em; }
+.stat-card p { margin: 0; font-size: 2.5em; font-weight: 700; }
+
+/* --- ¡CORREGIDO! SISTEMA DE NOTIFICACIONES (TOAST) --- */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.toast {
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    font-weight: 500;
+    animation: slideIn 0.3s ease-out;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+.toast.fade-out { opacity: 0; }
+.toast.success { background-color: var(--success-bg); color: var(--success-text); border: 1px solid var(--success-border); }
+.toast.error { background-color: var(--error-bg); color: var(--error-text); border: 1px solid var(--error-border); }
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* --- ¡CORREGIDO! SISTEMA DE MODAL (para Actualizar) --- */
+.modal-backdrop {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* ¡CAMBIO! Fondo blanco opaco como pediste */
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px); /* Efecto "vidrio" */
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+.modal-backdrop.visible {
+    display: flex; /* Se muestra cuando JS añade la clase .visible */
+}
+.modal {
+    background-color: var(--card-bg);
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    width: 400px;
+    animation: modalFadeIn 0.3s ease-out;
+}
+.modal h3 { margin-top: 0; color: var(--primary-color); }
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+@keyframes modalFadeIn {
+    from { transform: scale(0.9) translateY(-30px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}

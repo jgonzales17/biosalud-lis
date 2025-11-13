@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>BioSalud LIS - Iniciar Sesión</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* Estilos extras solo para esta página */
+        body {
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: var(--main-bg);
+        }
+        .login-container {
+            width: 400px;
+        }
+        /* Limpiamos el CSS del form-toggle que ya no existe */
+    </style>
+</head>
+<body>
+
+<main class="login-container">
+    <div class="card">
+        <div class="sidebar-header" style="background-color: #fff; margin-bottom: 20px;">
+            <img src="/images/logo.png" alt="BioSalud Logo" style="width: 180px; height: auto;">
+        </div>
+
+        <section id="form-login" class="form-section active">
+            <h3 style="text-align: center; color: var(--text-color); margin-top: 0;">Iniciar Sesión</h3>
+            <div class="input-group">
+                <label for="login-user">Nombre de Usuario:</label>
+                <input type="text" id="login-user" placeholder="Ej: admin">
+            </div>
+            <div class="input-group">
+                <label for="login-pass">Contraseña:</label>
+                <input type="password" id="login-pass">
+            </div>
+            <button onclick="login()">Ingresar</button>
+        </section>
+
+        <div id="toast-container" style="position: relative; top: 0; right: 0; margin-top: 15px;"></div>
+    </div>
+</main>
+
+<script src="/js/app.js"></script>
+
+</body>
+</html>

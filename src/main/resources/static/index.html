@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>BioSalud LIS - Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div id="toast-container"></div>
+
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <img src="/images/logo.png" alt="BioSalud Logo">
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#" data-page="page-dashboard" class="active">Dashboard</a></li>
+            <li><a href="#" data-page="page-pacientes">Gestión de Pacientes</a></li>
+            <li><a href="#" data-page="page-medicos">Gestión de Médicos</a></li>
+            <li><a href="#" data-page="page-ordenes">Crear Órdenes</a></li>
+            <li><a href="#" data-page="page-resultados">Registrar Resultados</a></li>
+            <li><a href="#" data-page="page-facturacion">Gestión de Facturación</a></li>
+            <li style="margin-top: 30px;">
+                <a href="#" onclick="logout()" style="background-color: #c0392b;">Cerrar Sesión</a>
+            </li>
+        </ul>
+    </nav>
+</aside>
+
+<main class="content">
+
+    <section id="page-dashboard" class="page-section active">
+        <div class="card">
+            <h3>Bienvenido al Sistema de Gestión de Laboratorio</h3>
+            <p>Usa el menú de la izquierda para navegar por los módulos del sistema.</p>
+        </div>
+        <div class="stat-grid">
+            <div class="stat-card">
+                <h4>Pacientes Registrados</h4>
+                <p id="stat-pacientes">0</p>
+            </div>
+            <div class="stat-card">
+                <h4>Médicos Activos</h4>
+                <p id="stat-medicos">0</p>
+            </div>
+            <div class="stat-card">
+                <h4>Órdenes Pendientes</h4>
+                <p id="stat-ordenes">0</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="page-pacientes" class="page-section">
+        <div class="card">
+            <h3>Registrar Nuevo Paciente</h3>
+            <form id="form-paciente">
+                <div class="form-grid">
+                    <div class="input-group"><label for="pac-dni">DNI:</label><input type="text" id="pac-dni"></div>
+                    <div class="input-group"><label for="pac-nombres">Nombres:</label><input type="text" id="pac-nombres"></div>
+                    <div class="input-group"><label for="pac-apellidos">Apellidos:</label><input type="text" id="pac-apellidos"></div>
+                    <div class="input-group"><label for="pac-fechaNacimiento">Fecha de Nacimiento:</label><input type="date" id="pac-fechaNacimiento"></div>
+                    <div class="input-group"><label for="pac-email">Email:</label><input type="text" id="pac-email"></div>
+                    <div class="input-group"><label for="pac-telefono">Teléfono:</label><input type="text" id="pac-telefono"></div>
+                </div>
+            </form>
+            <button onclick="registrarPaciente()">Registrar Paciente</button>
+        </div>
+        <div class="card">
+            <h3>Pacientes Registrados</h3>
+            <table>
+                <thead><tr><th>ID</th><th>DNI</th><th>Nombres</th><th>Apellidos</th><th>Email</th></tr></thead>
+                <tbody id="tabla-pacientes-body"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="page-medicos" class="page-section">
+        <div class="card">
+            <h3>Registrar Nuevo Médico</h3>
+            <form id="form-medico">
+                <div class="form-grid">
+                    <div class="input-group"><label for="med-cmp">CMP (Colegiatura):</label><input type="text" id="med-cmp"></div>
+                    <div class="input-group"><label for="med-nombres">Nombres:</label><input type="text" id="med-nombres"></div>
+                    <div class="input-group"><label for="med-apellidos">Apellidos:</label><input type="text" id="med-apellidos"></div>
+                    <div class="input-group"><label for="med-especialidad">Especialidad:</label><input type="text" id="med-especialidad"></div>
+                    <div class="input-group"><label for="med-telefono">Teléfono:</label><input type="text" id="med-telefono"></div>
+                </div>
+            </form>
+            <button onclick="registrarMedico()">Registrar Médico</button>
+        </div>
+        <div class="card">
+            <h3>Médicos Registrados</h3>
+            <table>
+                <thead><tr><th>ID</th><th>CMP</th><th>Nombres</th><th>Apellidos</th><th>Especialidad</th></tr></thead>
+                <tbody id="tabla-medicos-body"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="page-ordenes" class="page-section">
+        <div class="card">
+            <h3>Crear Nueva Orden de Laboratorio</h3>
+            <form id="form-orden">
+                <div class="input-group"><label for="orden-paciente">Paciente:</label><select id="orden-paciente"><option value="">-- Seleccione --</option></select></div>
+                <div class="input-group"><label for="orden-medico">Médico Solicitante:</label><select id="orden-medico"><option value="">-- Seleccione --</option></select></div>
+                <div class="input-group"><label for="orden-tipoExamen">Tipo de Examen:</label><input type="text" id="orden-tipoExamen"></div>
+                <div class="input-group"><label for="orden-observaciones">Observaciones:</label><input type="text" id="orden-observaciones"></div>
+            </form>
+            <button onclick="registrarOrden()">Crear Orden</button>
+        </div>
+    </section>
+
+    <section id="page-resultados" class="page-section">
+        <div class="card">
+            <h3>Registrar Nuevo Resultado</h3>
+            <form id="form-resultado">
+                <div class="form-grid">
+                    <div class="input-group"><label for="res-orden">Orden de Laboratorio:</label><select id="res-orden"><option value="">Cargando...</option></select></div>
+                    <div class="input-group"><label for="res-descripcion">Descripción (Parámetro):</label><input type="text" id="res-descripcion"></div>
+                    <div class="input-group"><label for="res-valores">Valores:</label><input type="text" id="res-valores"></div>
+                    <div class="input-group"><label for="res-conclusiones">Conclusiones:</label><input type="text" id="res-conclusiones"></div>
+                </div>
+            </form>
+            <button onclick="registrarResultado()">Registrar Resultado</button>
+        </div>
+        <div class="card">
+            <h3>Resultados Registrados (para Validación)</h3>
+            <table>
+                <thead><tr><th>ID Res.</th><th>ID Orden</th><th>Parámetro</th><th>Valores</th><th>Estado</th><th>Acciones</th></tr></thead>
+                <tbody id="tabla-resultados-body"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="page-facturacion" class="page-section">
+        <div class="card">
+            <h3>Generar Nueva Factura</h3>
+            <div class="input-group"><label for="fact-paciente">Paciente:</label><select id="fact-paciente"><option value="">Cargando...</option></select></div>
+            <div class="form-grid">
+                <div class="input-group"><label for="fact-metodo-pago">Método de Pago:</label><select id="fact-metodo-pago"><option value="Efectivo">Efectivo</option><option value="Tarjeta">Tarjeta</option><option value="Yape/Plin">Yape/Plin</option></select></div>
+            </div>
+            <hr style="border: 1px solid #f0f2f5; margin: 20px 0;">
+            <h4>Detalles de la Factura</h4>
+            <div id="factura-detalles-container">
+                <div class="form-grid detalle-item">
+                    <div class="input-group"><label>Descripción del Servicio:</label><input type="text" class="fact-detalle-desc"></div>
+                    <div class="input-group"><label>Cantidad:</label><input type="number" class="fact-detalle-cant" value="1"></div>
+                    <div class="input-group"><label>Precio Unitario (S/):</label><input type="number" class="fact-detalle-precio"></div>
+                </div>
+            </div>
+            <button class="btn-secondary" onclick="agregarDetalleFactura()">+ Agregar Otro Item</button>
+            <hr style="border: 1px solid #f0f2f5; margin: 20px 0;">
+            <button onclick="registrarFactura()">Emitir Factura</button>
+        </div>
+    </section>
+
+</main> <div id="modal-backdrop" class="modal-backdrop" onclick="cerrarModalActualizar()">
+    <div id="modal-actualizar" class="modal" onclick="event.stopPropagation()">
+        <h3>Actualizar Valores del Resultado</h3>
+        <div class="input-group">
+            <label for="modal-res-valores">Nuevos Valores:</label>
+            <input type="text" id="modal-res-valores" placeholder="Ej: 160.0 mg/dL">
+        </div>
+        <div class="modal-actions">
+            <button onclick="guardarActualizacionResultado()">Guardar Cambios</button>
+            <button class="btn-secondary" onclick="cerrarModalActualizar()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script src="/js/app.js"></script>
+<script>
+    // ¡SEGURIDAD! Verifica si el usuario ha iniciado sesión
+    const usuarioLogueado = sessionStorage.getItem('usuarioLogueado');
+
+    if (!usuarioLogueado) {
+        // Si NO hay usuario en el sessionStorage, ¡patéalo al login!
+        window.location.href = '/login.html';
+    }
+
+    // Función de Logout
+    function logout() {
+        sessionStorage.removeItem('usuarioLogueado'); // Borra la sesión
+        window.location.href = '/login.html'; // Lo manda al login
+    }
+</script>
+</body>
+</html>
