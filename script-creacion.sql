@@ -173,5 +173,6 @@ INSERT INTO usuario (nombre_usuario, contrasena, rol)
 VALUES ('admin', 'admin', 'ADMIN');
 GO
 
+
 PRINT '¡ÉXITO! Base de datos BioSaludDB creada y lista con usuario admin.';
 GO
